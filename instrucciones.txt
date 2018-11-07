@@ -1,0 +1,1 @@
+Hay que copiar el archivo config.properties a la carpeta ==> apache-tomcat-9.0.12/bin/

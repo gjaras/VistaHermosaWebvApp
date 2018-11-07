@@ -1,0 +1,27 @@
+body{
+    background-image: url("/VistaHermosaWebApp/resources/imgs/bg.jpg");
+    background-size:     auto;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+#login-panel{
+  margin: 5% auto;
+  max-width: 400px;
+}
+
+#main-panel{
+    margin: 5% auto;
+    max-width: 1000px;
+    background-color: #eaeff7 !important;
+}
+
+#pic{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    align-self: center;
+    width: 50%;
+    height: 50%
+}
