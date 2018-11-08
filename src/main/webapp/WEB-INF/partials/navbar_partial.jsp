@@ -17,12 +17,14 @@
             
         </div>
     </div>
-    <c:if test="${true}">
+    <c:if test="${userParams.get('userType') == 'admin'}">
         <div class="dropdown show" style="margin-left: 10px">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Usuarios
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="listUsers" class="dropdown-item">Listar Usuarios</a>
+                <a href="createUser" class="dropdown-item">Crear Usuario</a>
             </div>
         </div>
     </c:if>

@@ -72,7 +72,16 @@ public class DashboardServlet extends HttpServlet {
 
                     lastPermiso.put("permisoId", lastPermisoJson.get("permisoId").getAsString());
                     lastPermiso.put("permisoFecha", lastPermisoJson.get("permisoFecha").getAsString());
-                    lastPermiso.put("permisoStatus", lastPermisoJson.get("permisoStatus").getAsString());
+                    switch(Integer.parseInt(lastPermisoJson.get("permisoStatus").getAsString())){
+                        case 0:
+                            lastPermiso.put("permisoStatus", "rechazada");
+                            break;
+                        case 1:
+                            lastPermiso.put("permisoStatus", "aceptada");
+                            break;
+                        case 2:
+                            lastPermiso.put("permisoStatus", "pendiente");
+                    }
                     request.setAttribute("lastPermiso", lastPermiso);
                 }
                 request.setAttribute("solAcept", resultJson.get("solicitudesAceptadas") != null ? resultJson.get("solicitudesAceptadas") : 0);
