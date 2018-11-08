@@ -12,7 +12,7 @@
         <%@include file='/WEB-INF/partials/navbar_partial.jsp'%>
         <div class="card" id="main-panel">
             <div class="card-header">
-                <h5>Listado de Usuarios</h5>
+                <h5>Listar Usuarios</h5>
             </div>
             <div class="card-body">
                 <div class="container-fluid">

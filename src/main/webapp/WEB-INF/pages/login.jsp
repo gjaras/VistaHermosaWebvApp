@@ -23,7 +23,7 @@
                     </c:if>
                     <img class="card-img" src="resources/imgs/Logo Muni.PNG" id="pic" />
                     <div class="form-group">
-                        <input id="usr" type="text" name="usr" class="form-control" maxlength="10" title="rutUsuario" placeholder="Rut Usuario" />
+                        <input id="usr" type="text" name="usr" class="form-control" maxlength="10" title="usrName" placeholder="Nombre Usuario" />
                     </div>
                     <div class="form-group">
                         <input id="pwd" type="password" name="pwd" value="" title="passUsuario" class="form-control" placeholder="Contraseña" />

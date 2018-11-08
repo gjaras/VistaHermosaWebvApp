@@ -36,7 +36,7 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         LOG.info("Entered Dashboard. Setting view attributes");
         HttpSession session = request.getSession();
         HashMap user = (HashMap) session.getAttribute("userParams");
@@ -47,6 +47,7 @@ public class DashboardServlet extends HttpServlet {
         LOG.info("Initiating info request. Creating request object");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonObject requestJsonObject = new JsonObject();
+        LOG.info("Registered User Rut: "+user.get("userRut").toString());
         requestJsonObject.addProperty("rut", user.get("userRut").toString());
         String requestJsonString = gson.toJson(requestJsonObject);
         EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
@@ -54,15 +55,15 @@ public class DashboardServlet extends HttpServlet {
         //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
         String result = "";
         try {
-                LOG.info("Request Object Built. Requesting Dashboard Info");
+            LOG.info("Request Object Built. Requesting Dashboard Info");
             result = Request.Post(url).addHeader(HttpHeaders.CONTENT_TYPE, "application/json").addHeader("accessToken", Config.get("ACCESS_TOKEN"))
                     .body(eb.build()).execute().returnContent().asString();
             JsonObject resultJson = new JsonParser().parse(result).getAsJsonObject();
-            
+
             if (resultJson.get("response").getAsString().equalsIgnoreCase("failed")) {
-                    LOG.error("Server Problem");
-                    request.setAttribute("styleClass", "alert alert-danger");
-                    request.setAttribute("message", "There is a problem with the remote server: " + resultJson.get("message").getAsString());
+                LOG.error("Server Problem");
+                request.setAttribute("styleClass", "alert alert-danger");
+                request.setAttribute("message", "There is a problem with the remote server: " + resultJson.get("message").getAsString());
             } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
                 LOG.info("Successful server call");
                 if (resultJson.get("lastPermiso") != null) {
@@ -72,7 +73,7 @@ public class DashboardServlet extends HttpServlet {
 
                     lastPermiso.put("permisoId", lastPermisoJson.get("permisoId").getAsString());
                     lastPermiso.put("permisoFecha", lastPermisoJson.get("permisoFecha").getAsString());
-                    switch(Integer.parseInt(lastPermisoJson.get("permisoStatus").getAsString())){
+                    switch (Integer.parseInt(lastPermisoJson.get("permisoStatus").getAsString())) {
                         case 0:
                             lastPermiso.put("permisoStatus", "rechazada");
                             break;
@@ -87,14 +88,14 @@ public class DashboardServlet extends HttpServlet {
                 request.setAttribute("solAcept", resultJson.get("solicitudesAceptadas") != null ? resultJson.get("solicitudesAceptadas") : 0);
                 request.setAttribute("solRech", resultJson.get("solicitudesRechazadas") != null ? resultJson.get("solicitudesRechazadas") : 0);
                 request.setAttribute("solPend", resultJson.get("solicitudesPendientes") != null ? resultJson.get("solicitudesPendientes") : 0);
-                
+
             }
-            
+
         } catch (Exception ex) {
             request.setAttribute("styleClass", "alert alert-danger");
             request.setAttribute("message", "There is a problem with the remote server: " + ex.getMessage());
         }
-        
+
         request.getRequestDispatcher("/WEB-INF/pages/dashboard.jsp").forward(request, response);
     }
 
