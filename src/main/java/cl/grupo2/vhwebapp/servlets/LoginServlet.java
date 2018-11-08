@@ -72,9 +72,9 @@ public class LoginServlet extends HttpServlet {
                         //request.setAttribute("message", "User Correctly Authenticated"+resultJson.get("tipo").getAsString());
                         //request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
                         HashMap user = new HashMap();
-                        user.put("userRut", resultJson.get("rut"));
-                        user.put("userName", resultJson.get("nombre"));
-                        user.put("userType", resultJson.get("tipo"));
+                        user.put("userRut", resultJson.get("rut").getAsString());
+                        user.put("userName", resultJson.get("nombre").getAsString());
+                        user.put("userType", resultJson.get("tipo").getAsString());
                         HttpSession session = request.getSession();
 			session.setAttribute("userParams", user);
                         response.sendRedirect("dashboard");

@@ -12,6 +12,7 @@ body{
 
 #main-panel{
     margin: 5% auto;
+    margin-top: 1%;
     max-width: 1000px;
     background-color: #eaeff7 !important;
 }

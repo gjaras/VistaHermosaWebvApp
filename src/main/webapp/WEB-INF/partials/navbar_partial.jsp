@@ -5,7 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<nav class="navbar navbar-dark bg-info fixed-top text-uppercase justify-content-end" id="mainNav">
+<nav class="navbar navbar-dark bg-info static-top text-uppercase justify-content-end" id="mainNav">
     <div class="navbar-header">
         <a class="navbar-brand" href="dashboard">Municipalidad Visa Hermosa</a>
     </div>
