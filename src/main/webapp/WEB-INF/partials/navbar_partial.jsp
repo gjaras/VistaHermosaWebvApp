@@ -14,7 +14,17 @@
             Peticiones
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            
+            <a href="listPeticiones" class="dropdown-item">
+                <c:choose>
+                    <c:when test="${userParams.get('userType') != 'usuario'}">
+                        Todas las Peticiones
+                    </c:when>
+                    <c:otherwise>
+                        Mis Peticiones
+                    </c:otherwise>
+                </c:choose>
+            </a>
+            <a href="createPeticion" class="dropdown-item">Crear Peticion</a>
         </div>
     </div>
     <c:if test="${userParams.get('userType') == 'admin'}">
