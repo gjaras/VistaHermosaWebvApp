@@ -35,7 +35,7 @@
 
     .pagination>li.active>a {
         background: lightsteelblue !important;
-        border-color: steelblue !important;
+        border-color: darkgray !important;
         color: #fff;
     }
 </style>
