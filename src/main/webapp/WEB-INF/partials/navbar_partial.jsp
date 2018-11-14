@@ -33,7 +33,7 @@
                 Usuarios
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a href="listUsers" class="dropdown-item">Listar Usuarios</a>
+                <a href="listUsers?page=1" class="dropdown-item">Listar Usuarios</a>
                 <a href="createUser" class="dropdown-item">Crear Usuario</a>
             </div>
         </div>

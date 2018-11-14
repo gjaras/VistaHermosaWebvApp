@@ -22,11 +22,13 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">ID</th>
+                                        <th scope="col">Rut Solicitante</th>
                                         <th scope="col">Tipo</th>
                                         <th scope="col">Fecha Solicitud</th>
                                         <th scope="col">Fecha Inicio</th>
                                         <th scope="col">Fecha Fin</th>
                                         <th scope="col">Estado</th>
+                                        <th scope="col">Autorizador</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -34,10 +36,13 @@
                                     <c:forEach items="${members}" var="member">
                                         <tr>
                                             <td>${member.get('id')}</td>
-                                            <td>${member.get('tipo')}</td>
-                                            <td>${member.get('fecha inicio')}</td>
-                                            <td>${member.get('fecha fin')}</td>
-                                            <td>${member.get('estado')}</td>
+                                            <td>${member.get('rutSol')}</td>
+                                            <td>${member.get('type')}</td>
+                                            <td>${member.get('fecSol')}</td>
+                                            <td>${member.get('fecIni')}</td>
+                                            <td>${member.get('fecFin')}</td>
+                                            <td>${member.get('status')}</td>
+                                            <td>${member.get('aut')}</td>
                                             <td><i class="fas fa-check-circle"></i>  <i class="fas fa-times-circle"></i> </td>
                                         </tr>
                                     </c:forEach>

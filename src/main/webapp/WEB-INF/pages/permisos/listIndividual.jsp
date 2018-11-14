@@ -33,10 +33,11 @@
                                     <c:forEach items="${members}" var="member">
                                         <tr>
                                             <td>${member.get('id')}</td>
-                                            <td>${member.get('tipo')}</td>
-                                            <td>${member.get('fecha inicio')}</td>
-                                            <td>${member.get('fecha fin')}</td>
-                                            <td>${member.get('estado')}</td>
+                                            <td>${member.get('type')}</td>
+                                            <td>${member.get('fecSol')}</td>
+                                            <td>${member.get('fecIni')}</td>
+                                            <td>${member.get('fecFin')}</td>
+                                            <td>${member.get('status')}</td>
                                             <td><i class="fas fa-edit"></i></td>
                                         </tr>
                                     </c:forEach>

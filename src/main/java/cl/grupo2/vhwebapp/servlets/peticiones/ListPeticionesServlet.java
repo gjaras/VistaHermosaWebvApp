@@ -44,14 +44,15 @@ public class ListPeticionesServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
-        LOG.info("user type: "+type);
+        LOG.info("user type: " + type);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonObject requestJsonObject = new JsonObject();
+        LOG.info("comparing types");
         if (type.equalsIgnoreCase("Administrador") || type.equalsIgnoreCase("Encargado")) {
             LOG.info("User is Admin or Encargado");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonObject requestJsonObject = new JsonObject();
             String requestJsonString = gson.toJson(requestJsonObject);
             EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-            String url = Config.get("BD_BASE_URL")+"/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
             String result = "";
             try {
@@ -66,15 +67,30 @@ public class ListPeticionesServlet extends HttpServlet {
                     request.setAttribute("message", "There is a problem with the remote server: " + resultJson.get("message").getAsString());
                 } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
                     LOG.info("List successfuly retrieved");
-                    JsonArray listArray = resultJson.getAsJsonArray("users");
+                    JsonArray listArray = resultJson.getAsJsonArray("permisoList");
                     ArrayList userList = new ArrayList();
                     for (JsonElement element : listArray) {
                         LOG.info("there is element");
                         JsonObject member = element.getAsJsonObject();
                         HashMap hm = new HashMap();
-                        hm.put("id", member.get("id").getAsString());
-                        hm.put("nombre", member.get("nombre").getAsString());
-                        hm.put("tipo", member.get("tipo").getAsString());
+                        hm.put("id", member.get("permisoId").getAsString());
+                        hm.put("rutSol", member.get("permisoType").getAsString());
+                        hm.put("type", member.get("permisoFunc").getAsString());
+                        hm.put("fecSol", member.get("permisoFechaSol").getAsString());
+                        hm.put("fecIni", member.get("permisoFechaIni").getAsString());
+                        hm.put("fecFin", member.get("permisoFechaFin").getAsString());
+                        switch(Integer.parseInt(member.get("permisoStatus").getAsString())){
+                            case 0:
+                                hm.put("status", "Rechazada");
+                                break;
+                            case 1:
+                                hm.put("status", "Aceptada");
+                                break;
+                            case 2:
+                                hm.put("status", "Pendiente");
+                                break;
+                        }
+                        hm.put("aut", member.get("permisoAut").getAsString());
                         userList.add(hm);
                     }
                     request.setAttribute("members", userList);
@@ -86,8 +102,59 @@ public class ListPeticionesServlet extends HttpServlet {
             }
 
             request.getRequestDispatcher("/WEB-INF/pages/permisos/listAll.jsp").forward(request, response);
-        }else{
-            response.sendRedirect("dashboard");
+        } else {
+            LOG.info("User is Normal User");
+            requestJsonObject.addProperty("rut", ((HashMap) session.getAttribute("userParams")).get("userRut").toString());
+            String requestJsonString = gson.toJson(requestJsonObject);
+            EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
+            //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
+            String result = "";
+            try {
+                LOG.info("Request Object Built. Requesting List");
+                result = Request.Post(url).addHeader(HttpHeaders.CONTENT_TYPE, "application/json").addHeader("accessToken", Config.get("ACCESS_TOKEN"))
+                        .body(eb.build()).execute().returnContent().asString();
+                JsonObject resultJson = new JsonParser().parse(result).getAsJsonObject();
+
+                if (resultJson.get("response").getAsString().equalsIgnoreCase("failed")) {
+                    LOG.error("Server Problem");
+                    request.setAttribute("styleClass", "alert alert-danger");
+                    request.setAttribute("message", "There is a problem with the remote server: " + resultJson.get("message").getAsString());
+                } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
+                    LOG.info("List successfuly retrieved");
+                    JsonArray listArray = resultJson.getAsJsonArray("permisoList");
+                    ArrayList userList = new ArrayList();
+                    for (JsonElement element : listArray) {
+                        LOG.info("there is element");
+                        JsonObject member = element.getAsJsonObject();
+                        HashMap hm = new HashMap();
+                        hm.put("id", member.get("permisoId").getAsString());
+                        hm.put("type", member.get("permisoType").getAsString());
+                        hm.put("fecSol", member.get("permisoFechaSol").getAsString());
+                        hm.put("fecIni", member.get("permisoFechaIni").getAsString());
+                        hm.put("fecFin", member.get("permisoFechaFin").getAsString());
+                        switch(Integer.parseInt(member.get("permisoStatus").getAsString())){
+                            case 0:
+                                hm.put("status", "Rechazada");
+                                break;
+                            case 1:
+                                hm.put("status", "Aceptada");
+                                break;
+                            case 2:
+                                hm.put("status", "Pendiente");
+                                break;
+                        }
+                        userList.add(hm);
+                    }
+                    request.setAttribute("members", userList);
+                }
+
+            } catch (Exception ex) {
+                request.setAttribute("styleClass", "alert alert-danger");
+                request.setAttribute("message", "There is a problem with the remote server: " + ex.getMessage());
+            }
+
+            request.getRequestDispatcher("/WEB-INF/pages/permisos/listIndividual.jsp").forward(request, response);
         }
     }
 

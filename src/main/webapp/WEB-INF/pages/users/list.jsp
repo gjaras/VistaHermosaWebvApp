@@ -18,7 +18,8 @@
                 <div class="container-fluid">
                     <c:choose>
                         <c:when test="${not empty members}">
-                            <table class="table" style="border-collapse: collapse;border:solid 1px black">
+                            <%@include file='/WEB-INF/partials/paginator_partial.jsp'%>
+                            <table class="table" style="border-collapse: collapse;border:solid 1px black;margin-bottom:0px">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">ID</th>
@@ -28,7 +29,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${members}" var="member">
+                                    <c:forEach items="${members}" var="member" begin="${10*(param.page-1)}" end="${10*(param.page-1) + 9}">
                                         <tr>
                                             <td>${member.get('id')}</td>
                                             <td>${member.get('nombre')}</td>
@@ -38,7 +39,7 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
-
+                            <%@include file='/WEB-INF/partials/paginator_partial.jsp'%>
                         </c:when>
                         <c:otherwise>
                             No existen usuarios en el sistema.
