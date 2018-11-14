@@ -16,7 +16,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a href="listPeticiones" class="dropdown-item">
                 <c:choose>
-                    <c:when test="${userParams.get('userType') != 'usuario'}">
+                    <c:when test="${userParams.get('userType') != 'Funcionario'}">
                         Todas las Peticiones
                     </c:when>
                     <c:otherwise>
@@ -27,7 +27,7 @@
             <a href="createPeticion" class="dropdown-item">Crear Peticion</a>
         </div>
     </div>
-    <c:if test="${userParams.get('userType') == 'admin'}">
+    <c:if test="${userParams.get('userType') == 'Administrador'}">
         <div class="dropdown show" style="margin-left: 10px">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Usuarios

@@ -37,9 +37,9 @@
                         <div class="form-group">
                             <label for="type">Tipo</label>
                             <select id="type" name="type" class="form-control">
-                                <option value="usuario">usuario</option>
-                                <option value="encargado">encargado</option>
-                                <option value="admin">admin</option>
+                                <option value="Funcionario">usuario</option>
+                                <option value="Encargado">encargado</option>
+                                <option value="Administrador">admin</option>
                             </select>
                         </div>
                         <br />

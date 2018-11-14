@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author gabriel.jara
  */
-@WebServlet(name = "ListUsersServlet", urlPatterns = {"/listPeticiones"})
+@WebServlet(name = "ListPeticionesServlet", urlPatterns = {"/listPeticiones"})
 public class ListPeticionesServlet extends HttpServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(ListPeticionesServlet.class);
@@ -45,7 +45,7 @@ public class ListPeticionesServlet extends HttpServlet {
 
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: "+type);
-        if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("encargado")) {
+        if (type.equalsIgnoreCase("Administrador") || type.equalsIgnoreCase("Encargado")) {
             LOG.info("User is Admin or Encargado");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject requestJsonObject = new JsonObject();
@@ -85,7 +85,7 @@ public class ListPeticionesServlet extends HttpServlet {
                 request.setAttribute("message", "There is a problem with the remote server: " + ex.getMessage());
             }
 
-            request.getRequestDispatcher("/WEB-INF/pages/users/list.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/permisos/listAll.jsp").forward(request, response);
         }else{
             response.sendRedirect("dashboard");
         }

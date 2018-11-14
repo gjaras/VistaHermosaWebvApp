@@ -42,7 +42,7 @@ public class CreateUserServlet extends HttpServlet {
 
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: " + type);
-        if (type.equalsIgnoreCase("admin")) {
+        if (type.equalsIgnoreCase("Administrador")) {
             request.getRequestDispatcher("/WEB-INF/pages/users/create.jsp").forward(request, response);
         } else {
             response.sendRedirect("dashboard");

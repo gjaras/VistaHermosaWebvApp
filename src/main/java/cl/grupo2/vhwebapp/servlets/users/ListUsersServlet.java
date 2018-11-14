@@ -41,7 +41,7 @@ public class ListUsersServlet extends HttpServlet {
 
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: "+type);
-        if (type.equalsIgnoreCase("admin")) {
+        if (type.equalsIgnoreCase("Administrador")) {
             String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestuserlist";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
             String result = "";
