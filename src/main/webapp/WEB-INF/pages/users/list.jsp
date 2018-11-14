@@ -26,15 +26,21 @@
                                 <div class="col-sm-2">
                                     <input id="idUsr" type="text" name="idUsr" class="form-control" maxlength="10" title="idUsr" placeholder="Id" />
                                 </div>
-                                <label for="nombre" class="col-sm-2 offset-sm-1 col-form-label">Nombre: </label>
+                                <label for="nombreUsr" class="col-sm-2 offset-sm-1 col-form-label">Nombre: </label>
                                 <div class="col-sm-3">
-                                    <input id="nombre" type="text" name="nombre" class="form-control" maxlength="10" title="nombreUsr" placeholder="Nombre Usuario" />
+                                    <input id="nombreUsr" type="text" name="nombreUsr" class="form-control" maxlength="10" title="nombreUsr" placeholder="Nombre Usuario" />
                                 </div>
                             </div>
                             <div class="form-group row justify-content-center">
-                                <label for="tipo" class="col-sm-1 col-form-label">Tipo: </label>
+                                <label for="tipoUsr" class="col-sm-1 col-form-label">Tipo: </label>
                                 <div class="col-sm-2">
-                                    <input id="tipo" type="text" name="tipo" class="form-control" maxlength="10" title="tipoUsr" placeholder="Tipo Usuario" />
+                                    <div class="form-group">
+                                        <select id="tipoUsr" name="tipoUsr" class="form-control">
+                                            <option value="Funcionario">Funcionario</option>
+                                            <option value="Encargado">Encargado</option>
+                                            <option value="Administrador">Administrador</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6"></div>
                             </div>
@@ -53,6 +59,7 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Tipo</th>
+                                        <th scope="col">Rut</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -62,6 +69,7 @@
                                             <td>${member.get('id')}</td>
                                             <td>${member.get('nombre')}</td>
                                             <td>${member.get('tipo')}</td>
+                                            <td>${member.get('rut')}</td>
                                             <td>actions</td>
                                         </tr>
                                     </c:forEach>

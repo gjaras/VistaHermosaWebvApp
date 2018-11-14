@@ -13,6 +13,7 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,17 +61,17 @@ public class ListUsersServlet extends HttpServlet {
                     JsonArray listArray = resultJson.getAsJsonArray("users");
                     ArrayList userList = new ArrayList();
                     for (JsonElement element : listArray) {
-                        LOG.info("there is element");
                         JsonObject member = element.getAsJsonObject();
                         HashMap hm = new HashMap();
                         hm.put("id", member.get("id").getAsString());
                         hm.put("nombre", member.get("nombre").getAsString());
                         hm.put("tipo", member.get("tipo").getAsString());
+                        hm.put("rut", member.get("rut").getAsString());
                         userList.add(hm);
                     }
                     request.setAttribute("members", userList);
                     if(userList.size() > 0){
-                        request.setAttribute("pages", Math.ceil(userList.size()/10));
+                        request.setAttribute("pages", Math.ceil(new Double(userList.size())/10.0));
                     }
                 }
 
@@ -88,7 +89,58 @@ public class ListUsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LOG.info("Entered User List through Search post");
+        HttpSession session = request.getSession();
 
+        String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
+        LOG.info("user type: "+type);
+        if (type.equalsIgnoreCase("Administrador")) {
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestuserlistwp?id="
+                    +Objects.toString(request.getParameter("idUsr"),"")+"&nombreUsr="
+                    +Objects.toString(request.getParameter("nombreUsr"),"")+"&tipoUsr="
+                    +Objects.toString(request.getParameter("tipoUsr"),"");
+            //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
+            LOG.info("url: "+url);
+            String result = "";
+            try {
+                LOG.info("Requesting List");
+                result = Request.Get(url).addHeader("accessToken", Config.get("ACCESS_TOKEN"))
+                        .execute().returnContent().asString();
+                JsonObject resultJson = new JsonParser().parse(result).getAsJsonObject();
+
+                if (resultJson.get("response").getAsString().equalsIgnoreCase("failed")) {
+                    LOG.error("Server Problem");
+                    request.setAttribute("styleClass", "alert alert-danger");
+                    request.setAttribute("message", "There is a problem with the remote server: " + resultJson.get("message").getAsString());
+                } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
+                    LOG.info("List successfuly retrieved");
+                    JsonArray listArray = resultJson.getAsJsonArray("users");
+                    ArrayList userList = new ArrayList();
+                    for (JsonElement element : listArray) {
+                        JsonObject member = element.getAsJsonObject();
+                        HashMap hm = new HashMap();
+                        hm.put("id", member.get("id").getAsString());
+                        hm.put("nombre", member.get("nombre").getAsString());
+                        hm.put("tipo", member.get("tipo").getAsString());
+                        hm.put("rut", member.get("rut").getAsString());
+                        userList.add(hm);
+                    }
+                    request.setAttribute("members", userList);
+                    if(userList.size() > 0){
+                        request.setAttribute("pages", Math.ceil(new Double(userList.size())/10.0));
+                        LOG.info("Sending pages = "+request.getAttribute("pages"));
+                    }
+                }
+
+            } catch (Exception ex) {
+                request.setAttribute("styleClass", "alert alert-danger");
+                request.setAttribute("message", "There is a problem with the remote server: " + ex.getMessage());
+            }
+
+            request.getRequestDispatcher("/WEB-INF/pages/users/list.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("dashboard");
+        }
     }
 
 }

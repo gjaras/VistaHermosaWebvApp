@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div  class='d-flex'>
+    <div class="label">${pages}</div>
     <ul class='pagination mx-auto' style="margin: 0px;" >
         <li class="page-item <c:if test="${param.page == 1}">disabled</c:if>">
             <a class="page-link" href="listUsers?page=${param.page - 1}" aria-label="Previous">
@@ -13,9 +14,11 @@
                 <span class="sr-only">Previous</span>
             </a>
         </li>
-        <c:forEach var="i" begin="1" end="${pages}" step="1">
-            <li class="page-item <c:if test="${i == param.page}">active</c:if>"><a class="page-link" href="listUsers?page=${i}">${i}</a></li>
-        </c:forEach>
+        <c:if test="${pages > 1}">
+            <c:forEach var="i" begin="1" end="${pages}" step="1">
+                <li class="page-item <c:if test="${i == param.page}">active</c:if>"><a class="page-link" href="listUsers?page=${i}">${i}</a></li>
+                </c:forEach>
+            </c:if>
         <li class="page-item <c:if test="${param.page == pages}">disabled</c:if>">
             <a class="page-link" href="listUsers?page=${param.page + 1}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
