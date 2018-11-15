@@ -52,7 +52,7 @@ public class ListPeticionesServlet extends HttpServlet {
             LOG.info("User is Admin or Encargado");
             String requestJsonString = gson.toJson(requestJsonObject);
             EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestPeticionesList";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
             String result = "";
             try {
@@ -107,7 +107,7 @@ public class ListPeticionesServlet extends HttpServlet {
             requestJsonObject.addProperty("rut", ((HashMap) session.getAttribute("userParams")).get("userRut").toString());
             String requestJsonString = gson.toJson(requestJsonObject);
             EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestPeticionesList";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
             String result = "";
             try {

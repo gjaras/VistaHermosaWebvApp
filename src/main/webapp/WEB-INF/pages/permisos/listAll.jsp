@@ -43,7 +43,7 @@
                                             <td>${member.get('fecFin')}</td>
                                             <td>${member.get('status')}</td>
                                             <td>${member.get('aut')}</td>
-                                            <td><i class="fas fa-check-circle"></i>  <i class="fas fa-times-circle"></i> </td>
+                                            <td><i class="fas fa-check-circle" ><a href="#"></a></i>   <i class="fas fa-times-circle"></i> </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

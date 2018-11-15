@@ -51,7 +51,7 @@ public class DashboardServlet extends HttpServlet {
         requestJsonObject.addProperty("rut", user.get("userRut").toString());
         String requestJsonString = gson.toJson(requestJsonObject);
         EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-        String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
+        String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestDashboardInfo";
         //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
         String result = "";
         try {

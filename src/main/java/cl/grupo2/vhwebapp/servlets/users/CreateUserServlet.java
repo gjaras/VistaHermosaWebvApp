@@ -61,7 +61,7 @@ public class CreateUserServlet extends HttpServlet {
         requestJsonObject.addProperty("type", request.getParameter("type"));
         String requestJsonString = gson.toJson(requestJsonObject);
         EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-        String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/createuser";
+        String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/createUser";
         //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestauth";
         String result = "";
         try {

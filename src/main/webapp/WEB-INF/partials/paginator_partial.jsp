@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div  class='d-flex'>
-    <div class="label">${pages}</div>
     <ul class='pagination mx-auto' style="margin: 0px;" >
         <li class="page-item <c:if test="${param.page == 1}">disabled</c:if>">
             <a class="page-link" href="listUsers?page=${param.page - 1}" aria-label="Previous">
