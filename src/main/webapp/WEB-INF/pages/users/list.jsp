@@ -155,7 +155,7 @@
             var accessToken = getAccessToken();
             var id = idRaw.split("_")[1];
             return $.ajax({
-                url: baseUrl + "/IntegracionVistaHermosa/WebServiceAppWeb/requestUserData?id=" + id,
+                url: baseUrl + "/IntegracionVistaHermosa/restWs/usuario/requestSingleData?id=" + id,
                 headers: {
                     'Content-Type': 'application/json',
                     'accessToken': accessToken

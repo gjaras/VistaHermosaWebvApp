@@ -43,7 +43,7 @@ public class ListUsersServlet extends HttpServlet {
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: "+type);
         if (type.equalsIgnoreCase("Administrador")) {
-            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestUserList";
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/usuario/requestList";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
             String result = "";
             try {
@@ -95,7 +95,7 @@ public class ListUsersServlet extends HttpServlet {
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: "+type);
         if (type.equalsIgnoreCase("Administrador")) {
-            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestUserListWP?id="
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/usuario/requestListWP?id="
                     +Objects.toString(request.getParameter("idUsr"),"")+"&nombreUsr="
                     +Objects.toString(request.getParameter("nombreUsr"),"")+"&tipoUsr="
                     +Objects.toString(request.getParameter("tipoUsr"),"");
