@@ -11,20 +11,20 @@
     </div>
     <div class="dropdown show" style="margin-left: 10px">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Peticiones
+            Solicitudes
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a href="listPeticiones" class="dropdown-item">
+            <a href="listSolicitudes" class="dropdown-item">
                 <c:choose>
                     <c:when test="${userParams.get('userType') != 'Funcionario'}">
-                        Todas las Peticiones
+                        Todas las Solicitudes
                     </c:when>
                     <c:otherwise>
-                        Mis Peticiones
+                        Mis Solicitudes
                     </c:otherwise>
                 </c:choose>
             </a>
-            <a href="createPeticion" class="dropdown-item">Crear Peticion</a>
+            <a href="createSolicitud" class="dropdown-item">Crear Solicitud</a>
         </div>
     </div>
     <c:if test="${userParams.get('userType') == 'Administrador'}">

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.grupo2.vhwebapp.servlets.peticiones;
+package cl.grupo2.vhwebapp.servlets.solicitudes;
 
 import cl.grupo2.vhwebapp.servlets.users.*;
 import cl.grupo2.vhwebapp.util.Config;
@@ -32,10 +32,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author gabriel.jara
  */
-@WebServlet(name = "ListPeticionesServlet", urlPatterns = {"/listPeticiones"})
-public class ListPeticionesServlet extends HttpServlet {
+@WebServlet(name = "ListSolicitudesServlet", urlPatterns = {"/listSolicitudes"})
+public class ListSolicitudesServlet extends HttpServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ListPeticionesServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ListSolicitudesServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

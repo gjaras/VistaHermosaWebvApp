@@ -37,7 +37,7 @@ public class CreateUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOG.info("Entered User List");
+        LOG.info("Entered Create User");
         HttpSession session = request.getSession();
 
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();

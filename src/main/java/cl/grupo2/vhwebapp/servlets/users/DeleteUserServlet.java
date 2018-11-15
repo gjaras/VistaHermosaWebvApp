@@ -10,11 +10,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.fluent.Request;
 import org.slf4j.Logger;
@@ -32,39 +34,48 @@ public class DeleteUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String id = request.getParameter("usrId");
-        LOG.info("Delete user servlet called. User ID: "+id);
-        String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/usuario/delete?id="+id;
-        String result = "";
-        try {
-            LOG.info("Deleting User");
+        LOG.info("Delete user servlet called. User ID: " + id);
+        HttpSession session = request.getSession();
+
+        String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
+        LOG.info("user type: " + type);
+        if (type.equalsIgnoreCase("Administrador")) {
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/usuario/delete?id=" + id;
+            String result = "";
+            try {
+                LOG.info("Deleting User");
                 result = Request.Get(url).addHeader("accessToken", Config.get("ACCESS_TOKEN"))
                         .execute().returnContent().asString();
                 JsonObject resultJson = new JsonParser().parse(result).getAsJsonObject();
-            if (resultJson.get("response").getAsString().equalsIgnoreCase("failed")) {
-                LOG.error("Server Problem");
+                if (resultJson.get("response").getAsString().equalsIgnoreCase("failed")) {
+                    LOG.error("Server Problem");
 //                request.setAttribute("styleClass", "alert alert-danger");
 //                request.setAttribute("message", "There is a problem witth the server: " + resultJson.get("message").getAsString());
 //                request.getRequestDispatcher("/WEB-INF/pages/users/create.jsp").forward(request, response);
-            } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
-                if (resultJson.get("result").getAsString().equalsIgnoreCase("failed")) {
+                } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
+                    if (resultJson.get("result").getAsString().equalsIgnoreCase("failed")) {
 //                    request.setAttribute("styleClass", "alert alert-danger");
 //                    request.setAttribute("message", "User Could not be created. "+resultJson.get("message").getAsString());
 //                    request.getRequestDispatcher("/WEB-INF/pages/users/create.jsp").forward(request, response);
-                } else {
-                    
-                }
-            } else {
-                throw new Exception("Strange Exception");
-            }
+                    } else {
 
-        } catch (Exception ex) {
-            LOG.error("Exception Creating User");
+                    }
+                } else {
+                    throw new Exception("Strange Exception");
+                }
+
+            } catch (Exception ex) {
+                LOG.error("Exception Creating User");
 //            request.setAttribute("styleClass", "alert alert-danger");
 //            request.setAttribute("message", "problem Requesting Auth: " + ex.getLocalizedMessage());
 //            request.getRequestDispatcher("/WEB-INF/pages/users/create.jsp").forward(request, response);
+            }
+            response.sendRedirect("listUsers?page=1");
+        } else {
+            response.sendRedirect("dashboard");
         }
-        response.sendRedirect("listUsers?page=1");
     }
 
 }
