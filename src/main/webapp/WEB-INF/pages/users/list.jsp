@@ -70,7 +70,7 @@
                                             <td>${member.get('nombre')}</td>
                                             <td>${member.get('tipo')}</td>
                                             <td>${member.get('rut')}</td>
-                                            <td align="center"><i id="ver_${member.get('id')}" class="far fa-eye fa-lg" title="ver" onclick="getDetails(this.id)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-edit fa-lg" title="editar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-trash-alt fa-lg" title="borrar"></i></td>
+                                            <td align="center"><i id="ver_${member.get('id')}" class="far fa-eye fa-lg" title="ver" onclick="getDetails(this.id)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-edit fa-lg" title="editar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id="borrar_${member.get('id')}" class="fas fa-trash-alt fa-lg" title="borrar" onclick="deletePrompt(this.id)"></i></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -122,7 +122,15 @@
             </div>
         </div>
         <div id="delete" title="Dialog box">
-            chao a todos
+            <form id="delete-user" name="delete-user" method="post" action="deleteUser">
+                <div class="form-group">
+                    Realmente desea eliminar el registro de este Usuario?
+                </div>
+                <input type="hidden" id="usrId" name="usrId"/>
+                <div class="form-group text-center" >
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
         </div>
     </body>
     <style>
@@ -150,6 +158,11 @@
             });
         });
 
+        function deletePrompt(idRaw) {
+             var id = idRaw.split("_")[1];
+            $("#delete").dialog("open");
+            $("#usrId").val(id);
+        }
         function getDetails(idRaw) {
             var baseUrl = getBaseUrl();
             var accessToken = getAccessToken();
