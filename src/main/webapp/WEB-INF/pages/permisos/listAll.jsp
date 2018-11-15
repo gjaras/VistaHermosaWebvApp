@@ -21,15 +21,15 @@
                             <table class="table" style="border-collapse: collapse;border:solid 1px black">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Rut Solicitante</th>
-                                        <th scope="col">Tipo</th>
-                                        <th scope="col">Fecha Solicitud</th>
-                                        <th scope="col">Fecha Inicio</th>
-                                        <th scope="col">Fecha Fin</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Autorizador</th>
-                                        <th scope="col">Acciones</th>
+                                        <th style="width:4%" scope="col">ID</th>
+                                        <th style="width:12%" scope="col">Rut Solicitante</th>
+                                        <th style="width:10%" scope="col">Tipo</th>
+                                        <th style="width:10%" scope="col">Fecha Solicitud</th>
+                                        <th style="width:10%" scope="col">Fecha Inicio</th>
+                                        <th style="width:10%" scope="col">Fecha Fin</th>
+                                        <th style="width:12%" scope="col">Estado</th>
+                                        <th style="width:12%" scope="col">Autorizador</th>
+                                        <th style="width:20%"scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,7 +43,7 @@
                                             <td>${member.get('fecFin')}</td>
                                             <td>${member.get('status')}</td>
                                             <td>${member.get('aut')}</td>
-                                            <td><i class="fas fa-check-circle" ><a href="#"></a></i>   <i class="fas fa-times-circle"></i> </td>
+                                            <td align="center"><c:if test="${member.get('status') == 'Pendiente'}"><i id="accept_${member.get('id')}" class="fas fa-check-circle fa-lg" onclick="accept(this.id)" title="aceptar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id="reject_${member.get('id')}" class="fas fa-times-circle fa-lg" onclick="reject(this.id)" title="rechazar"></i></c:if></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -51,11 +51,70 @@
                             <%@include file='/WEB-INF/partials/paginator_partial.jsp'%>
                         </c:when>
                         <c:otherwise>
-                            No existen usuarios en el sistema.
+                            No existen solicitudes en el sistema.
                         </c:otherwise> 
                     </c:choose>
                 </div>
             </div>
         </div>
+        <div id="accept" title="Aceptar">
+            <form id="delete-user" name="delete-user" method="post" action="changeSolState">
+                <div class="form-group">
+                    Esta seguro de querer aceptar esta Solicitud?
+                </div>
+                <input type="hidden" id="solId" name="solId"/>
+                <input type="hidden" id="opType" name="opType" value="accept"/>
+                <div class="form-group text-center" >
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                </div>
+            </form>
+        </div>
+        <div id="reject" title="Rechazar">
+            <form id="delete-user" name="delete-user" method="post" action="changeSolState">
+                <div class="form-group">
+                    Esta seguro de querer rechazar esta Solicitud?
+                </div>
+                <input type="hidden" id="solId" name="solId"/>
+                <input type="hidden" id="opType" name="opType" value="reject"/>
+                <div class="form-group text-center" >
+                    <button type="submit" class="btn btn-danger">Rechazar</button>
+                </div>
+            </form>
+        </div>
     </body>
+    <style>
+        .fa-check-circle:hover {
+            color: green;
+        }
+
+        .fa-times-circle:hover {
+            color: red;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $("#accept").dialog({
+                autoOpen: false,
+                modal: true
+            });
+
+            $("#reject").dialog({
+                autoOpen: false,
+                modal: true
+            });
+        });
+
+        function accept(idRaw) {
+             var id = idRaw.split("_")[1];
+            $("#accept").dialog("open");
+            $("#solId").val(id);
+        }
+        
+        function reject(idRaw) {
+             var id = idRaw.split("_")[1];
+            $("#reject").dialog("open");
+            $("#solId").val(id);
+        }
+    </script>
 </html>

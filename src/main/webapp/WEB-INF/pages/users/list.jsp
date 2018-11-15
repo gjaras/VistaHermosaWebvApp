@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div id="delete" title="Dialog box">
+        <div id="delete" title="Eliminar">
             <form id="delete-user" name="delete-user" method="post" action="deleteUser">
                 <div class="form-group">
                     Realmente desea eliminar el registro de este Usuario?

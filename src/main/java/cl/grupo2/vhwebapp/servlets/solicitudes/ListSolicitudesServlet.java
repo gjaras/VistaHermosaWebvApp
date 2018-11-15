@@ -70,7 +70,7 @@ public class ListSolicitudesServlet extends HttpServlet {
                     JsonArray listArray = resultJson.getAsJsonArray("permisoList");
                     ArrayList solicitudesList = new ArrayList();
                     for (JsonElement element : listArray) {
-                        LOG.info("there is element");
+                        
                         JsonObject member = element.getAsJsonObject();
                         HashMap hm = new HashMap();
                         hm.put("id", member.get("permisoId").getAsString());
@@ -129,7 +129,7 @@ public class ListSolicitudesServlet extends HttpServlet {
                     JsonArray listArray = resultJson.getAsJsonArray("permisoList");
                     ArrayList solicitudesList = new ArrayList();
                     for (JsonElement element : listArray) {
-                        LOG.info("there is element");
+                        
                         JsonObject member = element.getAsJsonObject();
                         HashMap hm = new HashMap();
                         hm.put("id", member.get("permisoId").getAsString());

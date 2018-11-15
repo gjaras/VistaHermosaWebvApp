@@ -61,24 +61,12 @@ public class CreateSolicitudServlet extends HttpServlet {
         LOG.info("Attempting Create Solicitud");
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        String tipo = request.getParameter("tipoPer");
-        String fecInit = request.getParameter("fecInit");
-        String fecFin = request.getParameter("fecFin");
-        String desc = request.getParameter("desc");
         Part filePart = request.getPart("doc");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString().replace(" ","_").replace(".", "-");
 
         HttpSession session = request.getSession();
 
         String rut = ((HashMap) session.getAttribute("userParams")).get("userRut").toString();
-
-        LOG.info("Form Parameters:");
-        LOG.info("tipo: " + tipo);
-        LOG.info("fec init: " + fecInit);
-        LOG.info("fec fin: " + fecFin);
-        LOG.info("desc: " + desc);
-        LOG.info("file name: " + fileName);
 
         JsonObject requestJsonObject = new JsonObject();
         requestJsonObject.addProperty("tipo", request.getParameter("tipoPer"));
