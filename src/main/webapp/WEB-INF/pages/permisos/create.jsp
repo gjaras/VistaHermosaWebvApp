@@ -37,11 +37,11 @@
                     <div class="form-group row">
                         <label for="fecInit" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
                         <div class="col-sm-3">
-                            <input id="fecInit" type="text" name="fecInit" class="form-control" title="Fecha de Inicio" />
+                            <input id="fecInit" type="text" name="fecInit" class="form-control" title="Fecha de Inicio" autocomplete="off"/>
                         </div>
                         <label for="fecFin" class="col-sm-2 col-form-label">Fecha de Término: </label>
                         <div class="col-sm-3">
-                            <input id="fecFin" type="text" name="fecFin" class="form-control" title="Fecha de Inicio" />
+                            <input id="fecFin" type="text" name="fecFin" class="form-control" title="Fecha de Inicio" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="form-group row">

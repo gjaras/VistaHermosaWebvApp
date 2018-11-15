@@ -14,7 +14,7 @@
             Solicitudes
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a href="listSolicitudes" class="dropdown-item">
+            <a href="listSolicitudes?page=1" class="dropdown-item">
                 <c:choose>
                     <c:when test="${userParams.get('userType') != 'Funcionario'}">
                         Todas las Solicitudes

@@ -70,6 +70,7 @@ public class ListUsersServlet extends HttpServlet {
                         userList.add(hm);
                     }
                     request.setAttribute("members", userList);
+                    request.setAttribute("servletName", "listUsers");
                     if(userList.size() > 0){
                         request.setAttribute("pages", Math.ceil(new Double(userList.size())/10.0));
                     }
@@ -126,6 +127,7 @@ public class ListUsersServlet extends HttpServlet {
                         userList.add(hm);
                     }
                     request.setAttribute("members", userList);
+                    request.setAttribute("servletName", "listUsers");
                     if(userList.size() > 0){
                         request.setAttribute("pages", Math.ceil(new Double(userList.size())/10.0));
                         LOG.info("Sending pages = "+request.getAttribute("pages"));

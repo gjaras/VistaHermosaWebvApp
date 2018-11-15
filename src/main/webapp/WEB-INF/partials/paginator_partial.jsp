@@ -8,18 +8,18 @@
 <div  class='d-flex'>
     <ul class='pagination mx-auto' style="margin: 0px;" >
         <li class="page-item <c:if test="${param.page == 1}">disabled</c:if>">
-            <a class="page-link" href="listUsers?page=${param.page - 1}" aria-label="Previous">
+            <a class="page-link" href="${servletName}?page=${param.page - 1}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
         <c:if test="${pages > 1}">
             <c:forEach var="i" begin="1" end="${pages}" step="1">
-                <li class="page-item <c:if test="${i == param.page}">active</c:if>"><a class="page-link" href="listUsers?page=${i}">${i}</a></li>
+                <li class="page-item <c:if test="${i == param.page}">active</c:if>"><a class="page-link" href="${servletName}?page=${i}">${i}</a></li>
                 </c:forEach>
             </c:if>
         <li class="page-item <c:if test="${param.page == pages}">disabled</c:if>">
-            <a class="page-link" href="listUsers?page=${param.page + 1}" aria-label="Next">
+            <a class="page-link" href="${servletName}?page=${param.page + 1}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
             </a>

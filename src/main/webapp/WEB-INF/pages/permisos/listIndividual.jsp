@@ -30,7 +30,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${members}" var="member">
+                                    <c:forEach items="${members}" var="member" begin="${10*(param.page-1)}" end="${10*(param.page-1) + 9}">
                                         <tr>
                                             <td>${member.get('id')}</td>
                                             <td>${member.get('type')}</td>
@@ -43,7 +43,7 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
-
+                            <%@include file='/WEB-INF/partials/paginator_partial.jsp'%>
                         </c:when>
                         <c:otherwise>
                             No existen usuarios en el sistema.

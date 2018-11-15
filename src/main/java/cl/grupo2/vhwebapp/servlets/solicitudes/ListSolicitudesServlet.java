@@ -52,7 +52,7 @@ public class ListSolicitudesServlet extends HttpServlet {
             LOG.info("User is Admin or Encargado");
             String requestJsonString = gson.toJson(requestJsonObject);
             EntityBuilder eb = EntityBuilder.create().setText(requestJsonString);
-            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/WebServiceAppWeb/requestPeticionesList";
+            String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/permiso/requestList";
             //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestpeticioneslist";
             String result = "";
             try {
@@ -68,7 +68,7 @@ public class ListSolicitudesServlet extends HttpServlet {
                 } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
                     LOG.info("List successfuly retrieved");
                     JsonArray listArray = resultJson.getAsJsonArray("permisoList");
-                    ArrayList userList = new ArrayList();
+                    ArrayList solicitudesList = new ArrayList();
                     for (JsonElement element : listArray) {
                         LOG.info("there is element");
                         JsonObject member = element.getAsJsonObject();
@@ -91,9 +91,13 @@ public class ListSolicitudesServlet extends HttpServlet {
                                 break;
                         }
                         hm.put("aut", member.get("permisoAut").getAsString());
-                        userList.add(hm);
+                        solicitudesList.add(hm);
                     }
-                    request.setAttribute("members", userList);
+                    request.setAttribute("members", solicitudesList);
+                    request.setAttribute("servletName", "listSolicitudes");
+                    if(solicitudesList.size() > 0){
+                        request.setAttribute("pages", Math.ceil(new Double(solicitudesList.size())/10.0));
+                    }
                 }
 
             } catch (Exception ex) {
@@ -123,7 +127,7 @@ public class ListSolicitudesServlet extends HttpServlet {
                 } else if (resultJson.get("response").getAsString().equalsIgnoreCase("success")) {
                     LOG.info("List successfuly retrieved");
                     JsonArray listArray = resultJson.getAsJsonArray("permisoList");
-                    ArrayList userList = new ArrayList();
+                    ArrayList solicitudesList = new ArrayList();
                     for (JsonElement element : listArray) {
                         LOG.info("there is element");
                         JsonObject member = element.getAsJsonObject();
@@ -144,9 +148,13 @@ public class ListSolicitudesServlet extends HttpServlet {
                                 hm.put("status", "Pendiente");
                                 break;
                         }
-                        userList.add(hm);
+                        solicitudesList.add(hm);
                     }
-                    request.setAttribute("members", userList);
+                    request.setAttribute("members", solicitudesList);
+                    request.setAttribute("servletName", "listSolicitudes");
+                    if(solicitudesList.size() > 0){
+                        request.setAttribute("pages", Math.ceil(new Double(solicitudesList.size())/10.0));
+                    }
                 }
 
             } catch (Exception ex) {
