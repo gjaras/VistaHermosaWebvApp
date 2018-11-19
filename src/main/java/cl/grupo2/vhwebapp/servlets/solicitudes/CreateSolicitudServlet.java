@@ -105,7 +105,7 @@ public class CreateSolicitudServlet extends HttpServlet {
                     String url2 = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/documento/create?fileName="+fileName+"&solId="+permisoId;
                     String result2 = "";
                     result2 = Request.Post(url2).addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM).addHeader("accessToken", Config.get("ACCESS_TOKEN"))
-                            .body(eb.build()).execute().returnContent().asString();
+                            .body(eb2.build()).execute().returnContent().asString();
                     LOG.info("Result: "+result2);
                     JsonObject resultJson2 = new JsonParser().parse(result2).getAsJsonObject();
                     if (resultJson2.get("response").getAsString().equalsIgnoreCase("failed")) {

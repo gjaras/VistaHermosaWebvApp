@@ -62,7 +62,7 @@
                 <div class="form-group">
                     Esta seguro de querer aceptar esta Solicitud?
                 </div>
-                <input type="hidden" id="solId" name="solId"/>
+                <input type="hidden" id="solIdAccept" name="solIdAccept"/>
                 <input type="hidden" id="opType" name="opType" value="accept"/>
                 <div class="form-group text-center" >
                     <button type="submit" class="btn btn-success">Aceptar</button>
@@ -74,7 +74,7 @@
                 <div class="form-group">
                     Esta seguro de querer rechazar esta Solicitud?
                 </div>
-                <input type="hidden" id="solId" name="solId"/>
+                <input type="hidden" id="solIdReject" name="solIdReject"/>
                 <input type="hidden" id="opType" name="opType" value="reject"/>
                 <div class="form-group text-center" >
                     <button type="submit" class="btn btn-danger">Rechazar</button>
@@ -108,13 +108,13 @@
         function accept(idRaw) {
              var id = idRaw.split("_")[1];
             $("#accept").dialog("open");
-            $("#solId").val(id);
+            $("#solIdAccept").val(id);
         }
         
         function reject(idRaw) {
              var id = idRaw.split("_")[1];
             $("#reject").dialog("open");
-            $("#solId").val(id);
+            $("#solIdReject").val(id);
         }
     </script>
 </html>

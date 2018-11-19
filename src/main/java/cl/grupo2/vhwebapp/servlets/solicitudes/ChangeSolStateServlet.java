@@ -34,8 +34,8 @@ public class ChangeSolStateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("solId");
         String opType = request.getParameter("opType");
+        String id = opType.equalsIgnoreCase("accept") ? request.getParameter("solIdAccept") : request.getParameter("solIdReject");
         LOG.info("Change Solicitud State Servlet called. User ID: " + id);
         HttpSession session = request.getSession();
 
