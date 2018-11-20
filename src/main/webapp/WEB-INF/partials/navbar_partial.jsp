@@ -27,6 +27,16 @@
             <a href="createSolicitud" class="dropdown-item">Crear Solicitud</a>
         </div>
     </div>
+    <c:if test="${userParams.get('userType') == 'Administrador' || userParams.get('userType') == 'Encargado'}">
+        <div class="dropdown show" style="margin-left: 10px">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Funcionarios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="listFuncionarios?page=1" class="dropdown-item">Listar Funcionarios</a>
+            </div>
+        </div>
+    </c:if>
     <c:if test="${userParams.get('userType') == 'Administrador'}">
         <div class="dropdown show" style="margin-left: 10px">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,5 +48,5 @@
             </div>
         </div>
     </c:if>
-    <a class="btn btn-secondary ml-auto" href="dashboard">Logout</a>
+    <a class="btn btn-secondary ml-auto" href="logout">Logout</a>
 </nav>
