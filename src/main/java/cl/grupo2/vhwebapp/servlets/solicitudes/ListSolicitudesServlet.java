@@ -74,8 +74,8 @@ public class ListSolicitudesServlet extends HttpServlet {
                     JsonObject member = element.getAsJsonObject();
                     HashMap hm = new HashMap();
                     hm.put("id", member.get("permisoId").getAsString());
-                    hm.put("rutSol", member.get("permisoType").getAsString());
-                    hm.put("type", member.get("permisoFunc").getAsString());
+                    hm.put("rutSol", member.get("permisoFunc").getAsString());
+                    hm.put("type", member.get("permisoType").getAsString());
                     hm.put("fecSol", member.get("permisoFechaSol").getAsString());
                     hm.put("fecIni", member.get("permisoFechaIni").getAsString());
                     hm.put("fecFin", member.get("permisoFechaFin").getAsString());

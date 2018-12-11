@@ -26,6 +26,13 @@
         </li>
     </ul>
 </div>
+<script>
+    function callSearch(){
+        $("seach_form").submit(function(e){
+            $(this).append('<input type="hidden" name="someName" value="someValue">');
+        });
+    }
+</script>
 <style>
     .pagination>li>a{
         background-color: lightblue;

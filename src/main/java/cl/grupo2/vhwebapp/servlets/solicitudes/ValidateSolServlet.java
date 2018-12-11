@@ -5,6 +5,7 @@
  */
 package cl.grupo2.vhwebapp.servlets.solicitudes;
 
+import cl.grupo2.vhwebapp.servlets.LoginServlet;
 import cl.grupo2.vhwebapp.servlets.users.DeleteUserServlet;
 import cl.grupo2.vhwebapp.util.Config;
 import com.google.gson.JsonObject;
@@ -26,11 +27,17 @@ import org.slf4j.LoggerFactory;
  *
  * @author gabriel.jara
  */
-@WebServlet(name = "ChangeSolState", urlPatterns = {"/changeSolState"})
-public class ChangeSolStateServlet extends HttpServlet {
+@WebServlet(name = "ValidateSolServlet", urlPatterns = {"/validarSolicitud"})
+public class ValidateSolServlet extends HttpServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ChangeSolStateServlet.class);
-    
+    private static final Logger LOG = LoggerFactory.getLogger(ValidateSolServlet.class);
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/pages/validate.jsp").forward(request, response);
+        //processRequest(request, response);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

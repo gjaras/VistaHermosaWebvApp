@@ -15,6 +15,57 @@
                 <h5>Lista Peticiones</h5>
             </div>
             <div class="card-body">
+                <div class="card" style="margin-left: 5%; margin-right: 5%;margin-top:0;margin-bottom:10px">
+                    <div class="card-header">
+                        <h6>Buscar</h5>
+                    </div>
+                    <div class="card-body" style="margin:0 3% 0 0;padding:0">
+                        <form id="search-user" style="padding:2% 0% 0%;margin:0" name="search-user" method="post" action="listUsers?page=1">
+                            <div class="form-group row justify-content-center">
+                                <label for="idUsr" class="col-sm-1 col-form-label">ID: </label>
+                                <div class="col-sm-2">
+                                    <input id="idUsr" type="text" name="idUsr" class="form-control" maxlength="10" title="idUsr" placeholder="Id" />
+                                </div>
+                                <label for="tipoUsr" class="col-sm-1 offset-sm-1 col-form-label">Tipo: </label>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <select id="tipoUsr" name="tipoUsr" class="form-control">
+                                            <option value="Funcionario">Administrativo</option>
+                                            <option value="Encargado"></option>
+                                            <option value="Administrador"></option>
+                                        </select>
+                                    </div>
+                                </div>                 
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <label for="nombreUsr" class="col-sm-2 col-form-label" style="padding-right:2;margin-right:0">Fecha Inicio: </label>
+                                <div class="col-sm-2">
+                                    <input id="nombreUsr" type="text" name="nombreUsr" class="form-control" maxlength="10" title="nombreUsr" placeholder="Fecha Inicio" />
+                                </div>
+                                <label for="nombreUsr" class="col-sm-2 col-form-label">Fecha Fin: </label>
+                                <div class="col-sm-2">
+                                    <input id="nombreUsr" type="text" name="nombreUsr" class="form-control" maxlength="10" title="nombreUsr" placeholder="Fecha Fin" />
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <label for="tipoUsr" class="col-sm-1 col-form-label">Tipo: </label>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <select id="tipoUsr" name="tipoUsr" class="form-control">
+                                            <option value="Funcionario">Aceptados</option>
+                                            <option value="Encargado"></option>
+                                            <option value="Administrador"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <button type="submit" style="margin-top:2%;margin-bottom:0" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="container-fluid">
                     <c:choose>
                         <c:when test="${not empty members}">
@@ -35,7 +86,7 @@
                                 <tbody>
                                     <c:forEach items="${members}" var="member"  begin="${10*(param.page-1)}" end="${10*(param.page-1) + 9}">
                                         <tr>
-                                            <td>${member.get('id')}</td>
+                                            <td><a href="#" >${member.get('id')}</a></td>
                                             <td>${member.get('rutSol')}</td>
                                             <td>${member.get('type')}</td>
                                             <td>${member.get('fecSol')}</td>

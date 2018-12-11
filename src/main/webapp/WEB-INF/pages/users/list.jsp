@@ -24,11 +24,11 @@
                             <div class="form-group row justify-content-center">
                                 <label for="idUsr" class="col-sm-1 col-form-label">ID: </label>
                                 <div class="col-sm-2">
-                                    <input id="idUsr" type="text" name="idUsr" class="form-control" maxlength="10" title="idUsr" placeholder="Id" />
+                                    <input id="idUsr" type="text" name="idUsr" class="form-control" maxlength="10" title="idUsr" placeholder="Id" <c:if test="${not empty idUsr}">value="${idUsr}"</c:if>/>
                                 </div>
                                 <label for="nombreUsr" class="col-sm-2 offset-sm-1 col-form-label">Nombre: </label>
                                 <div class="col-sm-3">
-                                    <input id="nombreUsr" type="text" name="nombreUsr" class="form-control" maxlength="10" title="nombreUsr" placeholder="Nombre Usuario" />
+                                    <input id="nombreUsr" type="text" name="nombreUsr" class="form-control" maxlength="10" title="nombreUsr" placeholder="Nombre Usuario" <c:if test="${not empty nombreUsr}">value="${nombreUsr}"</c:if>/>
                                 </div>
                             </div>
                             <div class="form-group row justify-content-center">
@@ -36,9 +36,9 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <select id="tipoUsr" name="tipoUsr" class="form-control">
-                                            <option value="Funcionario">Funcionario</option>
-                                            <option value="Encargado">Encargado</option>
-                                            <option value="Administrador">Administrador</option>
+                                            <option <c:if test="${tipoUsr == 'Funcionario'}"> selected </c:if> value="Funcionario">Funcionario</option>
+                                            <option <c:if test="${tipoUsr == 'Encargado'}"> selected </c:if> value="Encargado">Encargado</option>
+                                            <option <c:if test="${tipoUsr == 'Administrador'}"> selected </c:if> value="Administrador">Administrador</option>
                                         </select>
                                     </div>
                                 </div>

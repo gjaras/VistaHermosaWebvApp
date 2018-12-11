@@ -80,7 +80,7 @@ public class CreateUserServlet extends HttpServlet {
                     request.setAttribute("message", "User Could not be created. "+resultJson.get("message").getAsString());
                     request.getRequestDispatcher("/WEB-INF/pages/users/create.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect("listUsers");
+                    response.sendRedirect("listUsers?page=1");
                 }
             } else {
                 throw new Exception("Strange Exception");

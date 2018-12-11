@@ -96,11 +96,13 @@ public class ListUsersServlet extends HttpServlet {
         String type = ((HashMap) session.getAttribute("userParams")).get("userType").toString();
         LOG.info("user type: "+type);
         if (type.equalsIgnoreCase("Administrador")) {
+            request.setAttribute("idUsr",request.getParameter("idUsr"));
+            request.setAttribute("nombreUsr",request.getParameter("nombreUsr"));
+            request.setAttribute("tipoUsr",request.getParameter("tipoUsr"));
             String url = Config.get("BD_BASE_URL") + "/IntegracionVistaHermosa/restWs/usuario/requestListWP?id="
                     +Objects.toString(request.getParameter("idUsr"),"")+"&nombreUsr="
                     +Objects.toString(request.getParameter("nombreUsr"),"")+"&tipoUsr="
                     +Objects.toString(request.getParameter("tipoUsr"),"");
-            //String url = "http://localhost:8081/IntegracionVistaHermosa/WebServiceAppWeb/requestdashboardinfo";
             LOG.info("url: "+url);
             String result = "";
             try {
@@ -138,7 +140,6 @@ public class ListUsersServlet extends HttpServlet {
                 request.setAttribute("styleClass", "alert alert-danger");
                 request.setAttribute("message", "There is a problem with the remote server: " + ex.getMessage());
             }
-
             request.getRequestDispatcher("/WEB-INF/pages/users/list.jsp").forward(request, response);
         }else{
             response.sendRedirect("dashboard");

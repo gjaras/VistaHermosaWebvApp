@@ -72,7 +72,7 @@
                                             <td>${member.get('fechaNac')}</td>
                                             <td>${member.get('cargo')}</td>
                                             <td>${member.get('unidad')}</td>
-                                            <td align="center"><i id="ver_${member.get('id')}" class="far fa-eye fa-lg" title="ver" onclick="getDetails(this.id)"></i></td>
+                                            <td align="center"><a href="viewFuncionario?rut=${member.get('rut')}"><i class="far fa-eye fa-lg" title="ver"></i></a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -86,109 +86,13 @@
                 </div>
             </div>
         </div>
-        <div id="view" title="Detalles">
-            <div id="listIndex" hidden="true"></div>
-            <div style="content-fluid">
-                <div class="row">
-                    <div class="col-sm-3">
-                        id:
-                    </div>
-                    <div id="idDetails" class="col-sm-9">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        nombre:
-                    </div>
-                    <div id="nombreDetails" class="col-sm-9">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        rut:
-                    </div>
-                    <div id="rutDetails" class="col-sm-9">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        tipo:
-                    </div>
-                    <div id="tipoDetails" class="col-sm-9">
-
-                    </div>   
-                </div>
-            </div>
-        </div>
-        <div id="delete" title="Eliminar">
-            <form id="delete-user" name="delete-user" method="post" action="deleteUser">
-                <div class="form-group">
-                    Realmente desea eliminar el registro de este Usuario?
-                </div>
-                <input type="hidden" id="usrId" name="usrId"/>
-                <div class="form-group text-center" >
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </div>
-            </form>
-        </div>
     </body>
     <style>
+        .fa-eye{
+            color: black
+        }
         .fa-eye:hover {
             color: green;
         }
-        .fa-edit:hover {
-            color: blue;
-        }
-        .fa-trash-alt:hover {
-            color: red;
-        }
     </style>
-
-    <script>
-        $(document).ready(function () {
-            $("#view").dialog({
-                autoOpen: false,
-                modal: true
-            });
-
-            $("#delete").dialog({
-                autoOpen: false,
-                modal: true
-            });
-        });
-
-        function deletePrompt(idRaw) {
-             var id = idRaw.split("_")[1];
-            $("#delete").dialog("open");
-            $("#usrId").val(id);
-        }
-        function getDetails(idRaw) {
-            var baseUrl = getBaseUrl();
-            var accessToken = getAccessToken();
-            var id = idRaw.split("_")[1];
-            return $.ajax({
-                url: baseUrl + "/IntegracionVistaHermosa/restWs/usuario/requestSingleData?id=" + id,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accessToken': accessToken
-                },
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    console.log('succes. This is the data: ' + data.id);
-                    $("#view").dialog("open");
-                    $("#idDetails").text(data.id);
-                    $("#nombreDetails").text(data.nombre);
-                    $("#rutDetails").text(data.rut);
-                    $("#tipoDetails").text(data.tipo);
-                },
-                error: function (error) {
-                    console.log('error: ' + error);
-                }
-            });
-        }
-    </script>
 </html>
