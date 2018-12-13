@@ -121,7 +121,7 @@ public class CreateSolicitudServlet extends HttpServlet {
                             request.getRequestDispatcher("/WEB-INF/pages/permisos/create.jsp").forward(request, response);
                         } else {
                             LOG.info("Document Creation Successful");
-                            response.sendRedirect("listPermisos");
+                            response.sendRedirect("listSolicitudes?page=1");
                         }
                     }
                 }

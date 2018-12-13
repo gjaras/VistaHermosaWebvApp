@@ -94,7 +94,7 @@
                                             <td>${member.get('fecFin')}</td>
                                             <td>${member.get('status')}</td>
                                             <td>${member.get('aut')}</td>
-                                            <td align="center"><c:if test="${member.get('status') == 'Pendiente'}"><i id="accept_${member.get('id')}" class="fas fa-check-circle fa-lg" onclick="accept(this.id)" title="aceptar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id="reject_${member.get('id')}" class="fas fa-times-circle fa-lg" onclick="reject(this.id)" title="rechazar"></i></c:if></td>
+                                            <td align="center"><a href="verPdf?id=${member.get('id')}"><i id="getpdf_${member.get('id')}" class="fas fa-file-pdf fa-lg" title="ver pdf"></i></a><c:if test="${member.get('status') == 'Pendiente'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id="accept_${member.get('id')}" class="fas fa-check-circle fa-lg" onclick="accept(this.id)" title="aceptar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i id="reject_${member.get('id')}" class="fas fa-times-circle fa-lg" onclick="reject(this.id)" title="rechazar"></i></c:if></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
